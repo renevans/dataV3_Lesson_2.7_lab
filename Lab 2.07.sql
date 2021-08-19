@@ -27,7 +27,8 @@ FROM film_actor fa
 JOIN actor a
 ON fa.actor_id = a.actor_id
 GROUP BY a.actor_id
-ORDER BY count(fa.film_id) desc;
+ORDER BY count(fa.film_id) desc
+LIMIT 1;
 
 -- 4.  Most active customer (the customer that has rented the most number of films)
 SELECT r.customer_id, c.first_name, c.last_name, count(r.inventory_id)
@@ -35,7 +36,8 @@ FROM rental r
 JOIN customer c
 ON r.customer_id = c.customer_id
 GROUP BY c.customer_id
-ORDER BY count(r.inventory_id) desc;
+ORDER BY count(r.inventory_id) desc
+LIMIT 1;
 
 -- 5.  Display the first and last names, as well as the address, of each staff member.
 SELECT s.staff_id, s.first_name, s.last_name, a.address
@@ -61,7 +63,7 @@ ORDER BY c.last_name asc;
 
 
 -- 8.  List number of films per category.
-SELECT c.category_id, c.name, count(film_id)
+SELECT c.category_id, c.name as Category, count(film_id) as Number_of_films
 FROM film_category fc
 JOIN category c
 ON c.category_id = fc.category_id
